@@ -28,4 +28,4 @@ Copy the code from index.js into a new worker. This can be done using the Cloudf
 
 5) Use your function with your own domain
 
-![VideoApp])(/images/videoapp.png)
+![VideoApp](/images/videoapp.png)
