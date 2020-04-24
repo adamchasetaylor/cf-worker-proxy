@@ -6,19 +6,29 @@ async function forwardReport(req) {
 
   const url = new URL(req.url)
   const path = url.pathname
-  const address = `${PROTOCOL}://${ORIGIN}/${path}`
+  const search = url.search
+  const address = `${PROTOCOL}://${ORIGIN}${path}${search}`
 
   let response = false
 
   const cacheKey = new Request(url, {
-    method: req.method
+    method: req.method,
+    headers: req.headers
   })
 
-  //Work Around for Admin Page in Word Press
+  //Work Around for Admin Page in Word Press, Since Hackers like to look for this....
   if ( path == '/wp-login.php' ){
     return new Response('', {
       status: 302,
       headers: { "Location": `${PROTOCOL}://${ORIGIN}/admin` }
+    })   
+  }
+
+  //Work Around for Missing FavIcon
+  if ( path == '/favicon.ico' ){
+    return new Response('', {
+      status: 302,
+      headers: { "Location": `https://www.twilio.com/favicon.ico` }
     })   
   }
 
@@ -29,7 +39,15 @@ async function forwardReport(req) {
 
   // otherwise, fetch from origin, add to cache
   if (!response) {
-    response = await fetch(address, { cf: { cacheTtl: 300 }  })
+
+    request = new Request(address, req)
+    request.headers.set('Origin', new URL(address).origin)
+
+   
+ console.log(new Map(request.headers))
+
+
+    response = await fetch(request, { cf: { cacheTtl: 300 }  })
     cache.put(cacheKey, response.clone())
   }
  
