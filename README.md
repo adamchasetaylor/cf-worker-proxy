@@ -1,4 +1,4 @@
-# twilio-videoapp-cf-worker-proxy
+# serverless-cf-worker-proxy
 Caching Serverless Proxy for Serverless Functions using Cloudflare Worker
 
 You can use this to use your own custom domain with Serverless Function
