@@ -7,7 +7,7 @@ It also provides caching which can be nifty if you are using Serverless Assets
 
 Example using Serverless Video App
 
-1) Setup you Serverelss Function (I'm using Twilio's free Video App here)
+1) Setup your Serverelss Function (I'm using Twilio's free Video App here)
 
 https://www.twilio.com/blog/open-source-video-apps-reactjs-ios-android
 
