@@ -16,14 +16,6 @@ async function forwardReport(req) {
     headers: req.headers
   })
 
-  //Work Around for Admin Page in Word Press, Since Hackers like to look for this....
-  if ( path == '/wp-login.php' ){
-    return new Response('', {
-      status: 302,
-      headers: { "Location": `${PROTOCOL}://${ORIGIN}/admin` }
-    })   
-  }
-
   //Work Around for Missing FavIcon
   if ( path == '/favicon.ico' ){
     return new Response('', {
